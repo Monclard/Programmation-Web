@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Module Web TP2</title>
+    <style>
+      #animatedElem
+      {
+        position: relative;
+        left:0px;
+        
+        width:42px;
+      	height:42px;
+      	background-color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="animatedElem"> 
+    </div>
+  </body>
+  <script type="text/javascript">
+  
+    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+  
+    var elem = document.getElementById("animatedElem");
+    var left = 0;
+    var vitesse = 100;
+    var timer;
+    var dateAvent = null;
+    // Move the element 10px on the right every 16ms
+    
+    function pausecomp(millis) 
+    {
+    	var date = new Date();
+    	var curDate = null;
+    	do
+      { 
+    		curDate = new Date(); 
+    	}
+      while(curDate-date < millis);
+    }
+       
+    function Update(timestamp)
+    {  
+      if (dateAvent === null) dateAvent = timestamp;   
+      var temp = (timestamp-dateAvent)/1000.0;//temps en s
+      var deplacement = vitesse * temp;
+      elem.style.left = parseInt((400 - ( left += deplacement ))) + "px";
+      
+      dateAvent = timestamp;      
+      
+      if(left<400)
+      {
+    		requestAnimationFrame(Update);
+    	}
+    };
+    
+    requestAnimationFrame(Update);
+  </script>
+</html>
