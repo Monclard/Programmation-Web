@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.carre{
+				width : 42px;
+				height : 42px;  
+			 	position : relative;
+				background : red;
+			}
+		</style>
+  	<script type="text/javascript">
+  		
+  		var idCarre = 0;
+  		var tabPos = [];	//Tableau des positions.
+  		var tabID = [];	//Tableau cpour les intervals.
+  		
+  				     	      
+  		function init()
+  		{
+  			for(var i = 0; i < 10; i++)	//Initialise les positions.
+  			{
+          
+          div = document.createElement("div");
+  				div.className = 'carre'; 
+          div.id = "zone" +i;
+
+  				document.body.appendChild(div);
+        
+  				tabPos[i] = 0;
+  			}
+  			setTimeout(startID,3000);	//On attend 3 secondes.
+  		}	
+  				
+  		function movement(id)
+  		{
+  
+  			tabID[id] = setInterval(function()
+        {	//Déplace le carré id
+  				var zone = document.getElementById("zone"+id); 	
+  				tabPos[id] += 10;
+  				zone.style.left = tabPos[id] + "px";	//Décalage de 10 pixels
+  				if (tabPos[id] >= 600)
+  				{
+  			 		
+  			 		clearInterval(tabID[id]); //Arrète de l'intervale id.
+  				}
+  			},100);	//update tout 0.1 seconde.
+  		   
+  		}
+  
+  		function startID()
+  		{	
+  			if (idCarre < 10)
+        {
+  				movement(idCarre);	//Lancement du deplacement pour le carre id
+  				idCarre++;						
+  			}
+  			setTimeout(startID, 1000);	//Appelle de la fonction toutes les 1 secondes
+  		}
+  		
+		
+    </script>
+ 	</head>
+ 	<body onload="init()">
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#carre
+      {
+				width : 42px;
+				height : 42px;  
+				background : red;
+			 	position : relative;
+			}
+		</style>
+		<script type="text/javascript">
+				
+    	var id;
+    	var pos = 10;		
+    	
+    	function tempsPause()
+    	{
+    		setTimeout(vitesse, 2000);	//debut apres 2 secondes
+    	}		
+    
+    	function start() 
+    	{
+    		id = setInterval(position, 100);//deplacement de 10px toute les 0.1 secondes.
+    	}
+    
+    	function position()
+    	{
+    		canvas = document.getElementById("carre");
+    		canvas.style.position = "absolute";
+    		canvas.style.left = pos + "px";		//la position du carre est augmente de 10 pixels en x.
+    		pos += 10;
+    		if (pos == 500)	//a 500 pixels on arrete d'update la position.
+    		{
+    			clearInterval(id);   //fin
+    		}   	   
+    	}
+  	</script>
+ 	</head>
+ 	<body onload="start()">
+		<div id="carre">
+    </div>
+	</body>
+</html>
